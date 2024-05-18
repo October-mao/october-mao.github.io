@@ -46,7 +46,12 @@ $(function () {
       curCnt = 0;
     }
 
+    const filter4 = $("#filter4").is(":checked");
+
     await cn.forEachOnlyLuhnValid(c => {
+      if (filter4 && c.includes("4")) {
+        return;
+      }
       curCnt++;
       totalCnt++;
       cards += formatCardNumber(c) + "\n";
@@ -70,7 +75,10 @@ $(function () {
       calc();
     }
   });
-
+  // 复选框状态变化时重新查询
+  $("#filter4").on("change", function () {
+    calc();
+  });
   document.getElementById('card').addEventListener('input', function () {
     var textInput = document.getElementById('card');
     var validCount = document.getElementById('validCount');
