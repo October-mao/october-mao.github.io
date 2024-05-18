@@ -41,6 +41,28 @@
     .card-red {
       color: red;
     }
+
+    /* CSS for clear button */
+    #clear-btn {
+      margin-left: 10px;
+      background-color: #87ceeb;
+      /* 将按钮背景色设置为天蓝色 */
+      border-color: #87ceeb;
+      /* 边框颜色也设置为天蓝色 */
+    }
+
+    #clear-btn:hover {
+      background-color: #7acfea;
+      /* 悬停时的背景色 */
+      border-color: #7acfea;
+      /* 悬停时的边框颜色 */
+    }
+
+    #clear-btn:focus {
+      outline: none;
+      /* 移除按钮的默认聚焦样式 */
+      box-shadow: none;
+    }
   </style>
 </head>
 
@@ -59,6 +81,7 @@
     <div class="input-group mb-3">
       <span class="input-group-text" id="card-length">0</span>
       <input class="form-control" type="text" id="card" placeholder="请输入卡号">
+      <button class="btn btn-danger" id="clear-btn" onclick="clearInput()">清空</button> <!-- 清空按钮 -->
     </div>
 
     <p class="result-p"><span id="validText">已输入有效位数：</span><span id="validCount">0</span></p>
@@ -77,6 +100,12 @@
   <script src="lib/luhn.js"></script>
   <script src="lib/card_util.js"></script>
   <script src="js/card_num.js"></script>
+
+  <script>
+    function clearInput () {
+      document.getElementById('card').value = ''; // 清空输入框内容
+    }
+  </script>
 </body>
 
 </html>
