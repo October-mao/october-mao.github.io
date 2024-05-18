@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="calc bank card number" />
+  <title>野生卡片聚集地🏠生成器</title>
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../libjscss/simple/simple.css" />
+
+  <style type="text/css">
+    body {
+      margin: 5px;
+    }
+
+    #main {
+      width: 100%;
+      margin: 0 auto;
+      max-width: 960px;
+    }
+
+    #card-length {
+      min-width: 36px;
+      padding: 6px 6px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    /* CSS for card result */
+    .card-green {
+      color: green;
+    }
+
+    .card-blue {
+      color: blue;
+    }
+
+    .card-red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript" charset="UTF-8" src="libjscss/mask/mask.js"></script>
+  <script type="text/javascript" charset="UTF-8">
+    var mask = new Mask();
+    mask.show();
+  </script>
+
+  <div id="main">
+    <h1>野生卡片聚集地🏠</h1>
+    <p id="prompt-info">根据输入的数字、字母及 * 号（同一字母表示相同数字，* 号表示任意数字）</p>
+    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<a href="" target="_blank">各家银行卡bin参考</a></p>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="card-length">0</span>
+      <input class="form-control" type="text" id="card" placeholder="请输入卡号">
+    </div>
+
+    <p class="result-p"><span id="validText">已输入有效位数：</span><span id="validCount">0</span></p>
+
+    <div class="alert alert-primary" role="alert">
+      请输入卡号，支持输入空格分隔符
+    </div>
+
+    <div id="rslt"></div>
+  </div>
+
+  <!-- JS Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="libjscss/toptip/toptip.js"></script>
+  <script src="libjscss/simple/simple.js"></script>
+  <script src="lib/luhn.js"></script>
+  <script src="lib/card_util.js"></script>
+  <script src="js/card_num.js"></script>
+</body>
+
+</html>
