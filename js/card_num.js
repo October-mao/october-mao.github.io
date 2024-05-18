@@ -49,7 +49,7 @@ $(function () {
     const filter4 = $("#filter4").is(":checked");
 
     await cn.forEachOnlyLuhnValid(c => {
-      if (filter4 && c.includes("4")) {
+      if (filter4 && c.slice(4).indexOf("4") !== -1) {
         return;
       }
       curCnt++;
