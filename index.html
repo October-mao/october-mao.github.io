@@ -76,8 +76,8 @@
   <div id="main">
     <h1>野生卡片聚集地🏠</h1>
     <p id="prompt-info">根据输入的数字、字母及 * 号（同一字母表示相同数字，* 号表示任意数字）</p>
-    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<a href="" target="_blank">各家银行卡bin参考</a></p>
-
+    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<button id="usageButton" class="btn btn-danger">使用说明</button></p>
+    <p id="prompt-info">欢迎提供好想法、好建议来优化该号码生成器，联系vx：yeeeoe</p>
     <div class="input-group mb-3">
       <span class="input-group-text" id="card-length">0</span>
       <input class="form-control" type="text" id="card" placeholder="请输入卡号">
@@ -102,6 +102,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="libjscss/toptip/toptip.js"></script>
   <script src="libjscss/simple/simple.js"></script>
+  <script src="js/explain.js" type="text/javascript"></script>
   <script src="lib/luhn.js"></script>
   <script src="lib/card_util.js"></script>
   <script src="js/card_num.js"></script>
