@@ -58,7 +58,22 @@
       /* 悬停时的边框颜色 */
     }
 
-    #clear-btn:focus {
+    #usageButton:hover {
+      background-color: #7acfea;
+      /* 悬停时的背景色 */
+      border-color: #7acfea;
+      /* 悬停时的边框颜色 */
+    }
+
+    #usageButton {
+      margin-left: 10px;
+      background-color: #87ceeb;
+      /* 将按钮背景色设置为天蓝色 */
+      border-color: #87ceeb;
+      /* 边框颜色也设置为天蓝色 */
+    }
+
+    #usageButton:focus {
       outline: none;
       /* 移除按钮的默认聚焦样式 */
       box-shadow: none;
@@ -76,7 +91,7 @@
   <div id="main">
     <h1>野生卡片聚集地🏠</h1>
     <p id="prompt-info">根据输入的数字、字母及 * 号（同一字母表示相同数字，* 号表示任意数字）</p>
-    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<button id="usageButton" class="btn btn-danger">使用说明</button></p>
+    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。</p>
     <p id="prompt-info">欢迎提供好想法、好建议来优化该号码生成器，联系vx：yeeeoe</p>
     <div class="input-group mb-3">
       <span class="input-group-text" id="card-length">0</span>
@@ -87,6 +102,7 @@
     <div class="form-check">
       <input class="form-check-input" type="checkbox" id="filter4">
       <label class="form-check-label" for="filter4">不包含4</label>
+      <button id="usageButton" class="btn btn-danger">使用说明</button>
     </div>
 
     <p class="result-p"><span id="validText">已输入有效位数：</span><span id="validCount">0</span></p>
