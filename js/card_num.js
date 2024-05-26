@@ -17,7 +17,6 @@ $(function () {
     if (cn) cn.stop();
     $rslt.empty();
     let card = $("#card").val().trim();
-    console.log(card);
     cookie.set("card_num_pattern", card, 24 * 30);
     if (!card) {
       $tip.text("请输入卡号信息！");
@@ -25,7 +24,6 @@ $(function () {
     }
 
     cn = new CardNo(card);
-    console.log(cn);
     if (cn.err) {
       toptip.show(cn.err);
       return;
@@ -47,8 +45,30 @@ $(function () {
     }
 
     const filterLength = parseInt($("#filterLength").val());
+    const filterDigits = $("input[type='checkbox']:checked").map(function () {
+      return this.value
+    }).get();
+    const digitsCount = parseInt($("#digitsCount").val());
 
     await cn.forEachOnlyLuhnValid(c => {
+      if (digitsCount > 0 && filterDigits.length > 0) {
+        // 根据空格数量调整 tailLength
+        let tailString = c.replace(/\s/g, "").slice(-filterLength);
+        const tailLength = filterLength + (tailString.length - tailString.replace(/\s/g, "").length);
+
+        // 过滤包含数字的逻辑
+        const tailSegment = c.replace(/\s/g, "").slice(-tailLength);
+
+        // 过滤后几位包含数字的逻辑
+        const lastDigits = tailSegment.slice(-digitsCount);
+        console.log("lastDigits:", lastDigits);
+        console.log("digitsCount:", digitsCount);
+        console.log("filterDigits:", filterDigits);
+        if (lastDigits.length === digitsCount && !filterDigits.some(digit => lastDigits.includes(digit))) {
+          return;
+        }
+      }
+
       if (filterLength > 0) {
         // 根据空格数量调整 tailLength
         let tailString = c.replace(/\s/g, "").slice(-filterLength);
@@ -78,14 +98,16 @@ $(function () {
   }
 
 
+
+
   $("body").on("keydown", e => {
     if (e.which == 13) {
       calc();
     }
   });
-  // 复选框状态变化时重新查询
+  // 多选框状态发生变化时重新查询
   $(document).ready(function () {
-    $("#filterLength").change(function () {
+    $("#filterLength, input[type='checkbox'], #digitsCount").change(function () {
       calc();
     });
   });
@@ -146,19 +168,15 @@ $(function () {
           }
           if (total > 0) {
             formattedCard += `<span style="color: ${color};">${cardNumber.substr(i - count + 1 - total, count + total)}</span>`;
-            console.log('total = ' + total + 'count = ' + count + 'i = ' + i + '截取 = ' + cardNumber.substr(i - count + 1 - total, count + total));
           } else {
             formattedCard += `<span style="color: ${color};">${cardNumber.substr(i - count + 1, count)}</span>`;
-            console.log('count = ' + count + 'i = ' + i + '截取 = ' + cardNumber.substr(i - count + 1, count));
           }
           total = 0;
         } else {
           if (total > 0) {
             formattedCard += cardNumber.substr(i - count + 1 - 1, count + 1);
-            console.log('total = ' + total + 'count = ' + count + 'i = ' + i + '截取 = ' + cardNumber.substr(i - count + 1 - 1, count + 1));
           } else {
             formattedCard += cardNumber.substr(i - count + 1, count);
-            console.log('count = ' + count + 'i = ' + i + '截取 = ' + cardNumber.substr(i - count + 1, count));
           }
           total = 0;
         }
