@@ -46,12 +46,19 @@ $(function () {
       curCnt = 0;
     }
 
-    const filter4 = $("#filter4").is(":checked");
+    const filterLength = parseInt($("#filterLength").val());
 
     await cn.forEachOnlyLuhnValid(c => {
-      if (filter4 && c.slice(4).indexOf("4") !== -1) {
-        return;
+      if (filterLength > 0) {
+        // 根据空格数量调整 tailLength
+        let tailString = c.replace(/\s/g, "").slice(-filterLength);
+        const tailLength = filterLength + (tailString.length - tailString.replace(/\s/g, "").length);
+
+        if (c.replace(/\s/g, "").slice(-tailLength).indexOf("4") !== -1) {
+          return;
+        }
       }
+
       curCnt++;
       totalCnt++;
       cards += formatCardNumber(c) + "\n";
@@ -70,14 +77,17 @@ $(function () {
     }
   }
 
+
   $("body").on("keydown", e => {
     if (e.which == 13) {
       calc();
     }
   });
   // 复选框状态变化时重新查询
-  $("#filter4").on("change", function () {
-    calc();
+  $(document).ready(function () {
+    $("#filterLength").change(function () {
+      calc();
+    });
   });
   document.getElementById('card').addEventListener('input', function () {
     var textInput = document.getElementById('card');
