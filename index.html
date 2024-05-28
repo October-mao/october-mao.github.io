@@ -107,8 +107,8 @@
     <h1>野生卡片聚集地🏠</h1>
     <p id="prompt-info">根据输入的数字、字母及 * 号（同一字母表示相同数字，* 号表示任意数字）</p>
     <p id="prompt-info">会根据输入前六位自动识别银行、类别（有误的和我反馈，部分银行无法识别，例如浦发钻石私行）</p>
-    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<button id="usageButton" class="btn btn-danger">使用说明</button></p>
-    <p id="prompt-info">欢迎提供好想法、好建议来优化该号码生成器，联系vx：yeeeoe</p>
+    <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。</p>
+    <p id="prompt-info">欢迎提供好想法来优化该生成器，联系vx：yeeeoe</p>
     <div class="input-group mb-3">
       <span class="input-group-text" id="card-length">0</span>
       <input class="form-control" type="text" id="card" placeholder="请输入卡号">
@@ -182,7 +182,8 @@
 
     <p></p>
 
-    <p class="result-p"><span id="validText">已输入有效位数：</span><span id="validCount">0</span></p>
+    <p class="result-p"><span id="validText">已输入有效位数：</span><span id="validCount">0</span><button id="usageButton"
+        class="btn btn-danger">使用说明</button></p>
 
     <div class="alert alert-primary" role="alert">
       请输入卡号，支持输入空格分隔符
