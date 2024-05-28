@@ -42,6 +42,20 @@
       color: red;
     }
 
+    /* 添加一个名为 result-div 的 CSS 类，用于修改结果 div 的样式 */
+    .result-div {
+      color: #fff;
+      /* 设置文本颜色为白色 */
+      background-color: #007bff;
+      /* 设置背景颜色为蓝色 */
+      padding: 10px;
+      /* 添加内边距 */
+      border-radius: 5px;
+      /* 添加圆角边框 */
+      margin-top: 10px;
+      /* 添加顶部外边距 */
+    }
+
     /* CSS for clear button */
     #clear-btn {
       margin-left: 10px;
@@ -82,6 +96,7 @@
 </head>
 
 <body>
+  <script src="json.js"></script>
   <script type="text/javascript" charset="UTF-8" src="libjscss/mask/mask.js"></script>
   <script type="text/javascript" charset="UTF-8">
     var mask = new Mask();
@@ -91,6 +106,7 @@
   <div id="main">
     <h1>野生卡片聚集地🏠</h1>
     <p id="prompt-info">根据输入的数字、字母及 * 号（同一字母表示相同数字，* 号表示任意数字）</p>
+    <p id="prompt-info">会根据输入前六位自动识别银行、类别（有误的和我反馈，部分银行无法识别，例如浦发钻石私行）</p>
     <p id="prompt-info">生成满足 Luhn 算法的银行卡号，用于卡号定制提前算号。<button id="usageButton" class="btn btn-danger">使用说明</button></p>
     <p id="prompt-info">欢迎提供好想法、好建议来优化该号码生成器，联系vx：yeeeoe</p>
     <div class="input-group mb-3">
@@ -98,7 +114,8 @@
       <input class="form-control" type="text" id="card" placeholder="请输入卡号">
       <button class="btn btn-danger" id="clear-btn" onclick="clearInput()">清空</button> <!-- 清空按钮 -->
     </div>
-
+    <div id="result" class="result-div"></div>
+    <p></p>
     <div class="form-group">
       <label for="filterLength">过滤卡号后几位不包含4：</label>
       <select class="form-control" id="filterLength" style="display:inline-block; width:auto; margin-left:10px;">
@@ -182,11 +199,44 @@
   <script src="lib/luhn.js"></script>
   <script src="lib/card_util.js"></script>
   <script src="js/card_num.js"></script>
-
   <script>
     function clearInput () {
       document.getElementById('card').value = ''; // 清空输入框内容
     }
+
+    function search () {
+      const searchValue = document.getElementById('card').value.replace(/\s/g, '').trim().toLowerCase().substring(0, 6); // 去除所有空白字符并保留前六位
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';
+
+      if (searchValue.length < 6) {
+        return; // 如果输入字符数小于四位，不执行搜索操作
+      }
+
+      let found = false;
+      let resultString = ''; // 存储搜索结果的字符串
+
+      excelData.forEach(item => {
+        const bankNoStr = item.bank_no.toString();
+        if (bankNoStr.startsWith(searchValue)) {
+          if (found) {
+            resultString += ', '; // 在结果之间添加逗号分隔
+          }
+          resultString += item.bank_name; // 将银行名称添加到结果字符串中
+          found = true;
+        }
+      });
+
+      if (found) {
+        resultDiv.innerHTML = resultString; // 将结果字符串设置为结果 div 的内容
+      } else {
+        resultDiv.innerHTML = 'No results found';
+      }
+    }
+
+    // 监听输入事件
+    document.getElementById('card').addEventListener('input', search);
+
   </script>
 </body>
 
