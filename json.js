@@ -7039,6 +7039,10 @@ var excelData = [
     "bank_no": 622618,
     "bank_name": "民生银行-钻石卡-借记卡"
   },
+    {
+    "bank_no": 623683,
+    "bank_name": "民生银行-银卡-借记卡"
+  },
   {
     "bank_no": 622619,
     "bank_name": "民生银行-民生借记卡(银联卡)-借记卡"
