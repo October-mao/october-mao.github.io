@@ -131,7 +131,7 @@ $(function () {
 
   mask.hide();
 
-  // 格式化卡号，根据连续出现次数设置颜色 6231 3618 8886 6666  i=12  count=4
+  // 格式化卡号，根据连续出现次数设置颜色 
   function formatCardNumber (cardNumber) {
     console.log(cardNumber)
     let formattedCard = '';
